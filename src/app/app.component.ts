@@ -27,6 +27,8 @@ const selectedCart: Price[] = [
   { price: 67 },
   { price: 1305 }
 ];
+
+const TYPE_TO = "RUB";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -43,7 +45,7 @@ export class AppComponent implements OnInit {
     this.result = CURRENCY_CODES.map((currency: CurrencyCode) => ({
       key: currency.key,
       amount$: this.currencyService
-        .getCurrency(currency.code)
+        .getCurrency(currency.code, TYPE_TO)
         .pipe(map(rate => this.calcAmount(rate, sum)))
     }));
     // this.result.forEach(res => res.amount$.subscribe(val => console.log(val)));

@@ -12,17 +12,17 @@ const url = "https://free.currconv.com/api/v7/convert";
 export class CurrencyService {
   constructor(private http: HttpClient) {}
 
-  getCurrency(type: string): Observable<number> {
+  getCurrency(typeFrom: string, typeTo): Observable<number> {
     let params: HttpParams = new HttpParams();
     params = params.append("apiKey", key);
     params = params.append("compact", "y");
-    const q = `${type}_RUB`;
+    const q = `${typeFrom}_${typeTo}`;
     params = params.append("q", q);
 
     console.log(url);
     console.log(params);
 
-    return type === "RUB"
+    return typeFrom === typeTo
       ? of(1)
       : this.http
           .get(url, { params: params })
