@@ -1,31 +1,30 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { TestBed, async } from "@angular/core/testing";
+import { AppComponent } from "./app.component";
+import { CurrencyService } from "./services";
+import { Observable } from "rxjs";
 
-describe('AppComponent', () => {
+describe("AppComponent", () => {
+  const currencyServiceStub: Partial<CurrencyService> = {
+    getCurrency(type: string): Observable<number> {
+      return new Observable();
+    }
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+      declarations: [AppComponent],
+      providers: [
+        {
+          provide: CurrencyService,
+          useValue: currencyServiceStub
+        }
+      ]
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
+  it("should create the app", () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'currency-calc'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('currency-calc');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to currency-calc!');
   });
 });
