@@ -39,16 +39,20 @@ export class AppComponent implements OnInit {
   constructor(private currencyService: CurrencyService) {}
 
   ngOnInit() {
-    const sum = selectedCart
-      .map(value => value.price)
-      .reduce((prevValue, curValue) => prevValue + curValue);
+    const sum = this.calcCartSum(selectedCart);
     this.result = CURRENCY_CODES.map((currency: CurrencyCode) => ({
       key: currency.key,
       amount$: this.currencyService
         .getCurrency(currency.code)
         .pipe(map(rate => this.calcAmount(rate, sum)))
     }));
-    this.result.forEach(res => res.amount$.subscribe(val => console.log(val)));
+    // this.result.forEach(res => res.amount$.subscribe(val => console.log(val)));
+  }
+
+  private calcCartSum(cart: Price[]) {
+    return cart
+      .map(value => value.price)
+      .reduce((prevValue, curValue) => prevValue + curValue);
   }
 
   private calcAmount(rate: number, sum: number): number {
