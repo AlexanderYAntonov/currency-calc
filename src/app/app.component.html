@@ -1,7 +1,2 @@
-<ng-container *ngFor="let item of result">
-  <div *ngIf="item?.amount$ | async as amount">
-    <span>{{item?.key}} - </span>
-    <span>{{amount}}</span>
-  </div>
-</ng-container>
+{{totalCartPrice | json}}
 

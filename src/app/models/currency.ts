@@ -3,6 +3,23 @@ export interface CurrencyCode {
   code: string;
 }
 
+export interface Price {
+  price: number;
+}
+
+export interface PositionTotalPrice {
+  key: string;
+  amount: number;
+}
+
+export interface TotalCartPrice {
+  rubles: number;
+  euros: number;
+  "US dollars": number;
+  pounds: number;
+  yens: number;
+}
+
 export const CURRENCY_CODES: CurrencyCode[] = [
   {
     key: "rubles",
